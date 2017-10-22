@@ -20,27 +20,32 @@ import java.io.OutputStream;
 public class Main2Activity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 1;
+    public static final int REQUEST_CODE1 = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-//        findViewById(R.id.select_img).setOnClickListener((v) -> {
-//            pickImg();
-//        });
-        reP();
-        pickImg();
+        findViewById(R.id.select_img).setOnClickListener((v) -> {
+            pickImg(REQUEST_CODE);
+            reP();
+        });
+        findViewById(R.id.select_img1).setOnClickListener((v) -> {
+            pickImg(REQUEST_CODE1);
+        });
+
+//        pickImg(REQUEST_CODE);
 
     }
 
-    private void pickImg() {
+    private void pickImg(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/jpeg");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            startActivityForResult(intent, REQUEST_CODE);
+            startActivityForResult(intent, requestCode);
         } else {
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, requestCode);
         }
     }
 
@@ -54,6 +59,12 @@ public class Main2Activity extends AppCompatActivity {
             if (data != null) {
                 setResultImage2(data);
 //                setResultImage(data);
+            }
+        } else if (requestCode == REQUEST_CODE1) {
+            // 从相册返回的数据
+            if (data != null) {
+//                setResultImage2(data);
+                setResultImage(data);
             }
         }
     }
@@ -92,8 +103,7 @@ public class Main2Activity extends AppCompatActivity {
         saveImageToExtraOutput(pickUri);
         resultIntent.setData(pickUri);
         resultIntent.putExtra(MediaStore.EXTRA_OUTPUT, pickUri);
-        setResult(Activity.RESULT_OK, resultIntent);
-        finish();
+        setResultAndReturn(resultIntent);
     }
 
     private void setResultImage(Intent data) {
@@ -107,10 +117,14 @@ public class Main2Activity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeStream(image_stream);
             Intent data1 = new Intent();
             data1.putExtra("data", bitmap);
-            setResult(Activity.RESULT_OK, data1);
-            finish();
+            setResultAndReturn(data1);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setResultAndReturn(Intent data1) {
+        setResult(Activity.RESULT_OK, data1);
+        finish();
     }
 }

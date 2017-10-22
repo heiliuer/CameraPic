@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static int REQUEST_CAMERA_1 = 1;
     private static int REQUEST_CAMERA_2 = 2;
-    private ImageView imgPreview;
 
 
     @Override
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         PATHNAME = getExternalFilesDir(null).getAbsolutePath() + "/data.jpg";
 
-        imgPreview = (ImageView) findViewById(R.id.imgPreview);
 
         findViewById(R.id.btnClick).setOnClickListener(v -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -81,13 +78,11 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == REQUEST_CAMERA_1) { // 判断请求码是否为REQUEST_CAMERA,如果是代表是这个页面传过去的，需要进行获取
                 Bundle bundle = data.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
                 Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
-                imgPreview.setImageBitmap(bitmap);// 显示图片
             } else if (requestCode == REQUEST_CAMERA_2) {
                 FileInputStream fis = null;
                 try {
                     fis = new FileInputStream(PATHNAME); // 根据路径获取数据
                     Bitmap bitmap = BitmapFactory.decodeStream(fis);
-                    imgPreview.setImageBitmap(bitmap);// 显示图片
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } finally {

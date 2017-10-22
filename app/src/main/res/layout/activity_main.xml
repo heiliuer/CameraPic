@@ -10,16 +10,21 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:text="相机转相册工具"
+            android:textSize="30dp"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
 
-    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:orientation="vertical" tools:layout_editor_absoluteY="-4dp"
-                  tools:layout_editor_absoluteX="0dp">
+    <LinearLayout
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" tools:layout_editor_absoluteY="-4dp"
+            tools:layout_editor_absoluteX="0dp">
 
 
         <Button android:layout_width="wrap_content" android:text="@string/btn_open_camera"
