@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.heiliuer.zhongqi.camerapic.Main2Activity">
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/select_img"
+            android:id="@+id/select_img"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/hello"/>
+
+
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/imgPreview"/>
+
+</android.support.constraint.ConstraintLayout>
